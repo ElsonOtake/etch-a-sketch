@@ -14,5 +14,18 @@
 </head>
 <body>
     <div id="container"></div>
+    <script>
+        let size = 16;
+        let container = document.getElementById("container");
+        for (let row = 0; row < size; row++) {
+            for (let col = 0; col < size; col++) {
+                let sqrdiv = document.createElement("div");
+                sqrdiv.className = "sqrdiv";
+                sqrdiv.setAttribute("data-square", row * size + col);
+                container.appendChild(sqrdiv);
+            }
+        }
+        console.log(document.body);
+    </script>
 </body>
 </html>
