@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Etch-A-Sketch</title>
-  <style id="style">
-      #container {
-          display: flex;
-          width: 720px;
-          height: 720px;
-          flex-wrap: wrap;
-      }
-  </style>
+    <meta charset="UTF-8">
+    <title>Etch-A-Sketch</title>
+    <style id="style">
+        #container {
+            display: flex;
+            width: 720px;
+            height: 720px;
+            flex-wrap: wrap;
+        }
+        .sqrdiv {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <div id="container"></div>
     <script>
         let size = 16;
+        let sqrSize = Math.floor(600 / (0.02 + 1.02 * size));
+        let sqrMargin = sqrSize * 0.02;
         let container = document.getElementById("container");
+        let sqrcss = document.querySelector("#style");
         for (let row = 0; row < size; row++) {
+            let sqrrow = document.createElement("div");
+            container.appendChild(sqrrow);
             for (let col = 0; col < size; col++) {
                 let sqrdiv = document.createElement("div");
                 sqrdiv.className = "sqrdiv";
                 sqrdiv.setAttribute("data-square", row * size + col);
-                container.appendChild(sqrdiv);
+                sqrrow.appendChild(sqrdiv);
             }
         }
+        sqrcss.sheet.insertRule('.sqrdiv {width:'+sqrSize+'px;height:'+sqrSize+'px;margin:'+sqrMargin+';}');
         console.log(document.body);
     </script>
 </body>
