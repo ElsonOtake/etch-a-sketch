@@ -12,33 +12,66 @@
         .over {
             background-color: black;
         }
+        h3 {
+            color: red;
+        }
     </style>
 </head>
 <body>
+    <button id="button">Clear grid</button>
+    <br><br>
+    <h3 id="message"></h3>
     <div id="container"></div>
     <script>
         let size = 16;
-        let sqrSize = Math.floor(960 / (0.02 + 1.02 * size));
-        let sqrMargin = sqrSize * 0.02;
         let container = document.getElementById("container");
-        let sqrcss = document.querySelector("#style");
-        for (let row = 0; row < size; row++) {
-            let sqrrow = document.createElement("div");
-            container.appendChild(sqrrow);
-            for (let col = 0; col < size; col++) {
-                let sqrdiv = document.createElement("div");
-                sqrdiv.className = "sqrdiv";
-                sqrdiv.setAttribute("data-square", row * size + col);
-                sqrrow.appendChild(sqrdiv);
-            }
-        }
-        sqrcss.sheet.insertRule('.sqrdiv {width:'+sqrSize+'px;height:'+sqrSize+'px;margin:'+sqrMargin+';}');
-        container.addEventListener("mouseover",function(e) {
-            if (e.target.className == "sqrdiv") {
-                    e.target.className += " over";
+        let css = document.querySelector("#style");
+        let button = document.getElementById("button");
+        let message = document.getElementById("message");
+        button.addEventListener("click", function() {
+            let newSize = prompt("Numbers of squares per side of grid?", size);
+            if (isNaN(newSize) || newSize < 1 || newSize > 100) {
+                message.innerText = "Input must be a number from 1 to 100!";
+            } else {              
+                size = newSize;
+                let rows = document.getElementsByClassName("rows");
+                for (let i = 0; i < rows.length; i++) {
+                    while (rows[i].hasChildNodes()) {
+                    rows[i].removeChild(rows[i].firstChild);
+                    }
+                }
+                while (container.hasChildNodes()) {
+                container.removeChild(container.firstChild);
+                }
+                css.sheet.deleteRule(0);
+                console.log(document.body);
+                startGrid();
             }
         })
+        startGrid();
+        function startGrid() {
+            let squareSize = Math.floor(960 / (0.02 + 1.02 * size));
+            let squareMargin = squareSize * 0.02;
+            for (let row = 0; row < size; row++) {
+                let rows = document.createElement("div");
+                rows.className = "rows";
+                container.appendChild(rows);
+                for (let col = 0; col < size; col++) {
+                    let div = document.createElement("div");
+                    div.className = "square";
+                    div.setAttribute("data-square", row * size + col);
+                    rows.appendChild(div);
+                }
+            }
+            css.sheet.insertRule('.square {width:'+squareSize+'px;height:'+squareSize+'px;margin:'+squareMargin+';}', 0);
+            container.addEventListener("mouseover",function(e) {
+                if (e.target.className == "square") {
+                        e.target.className += " over";
+                }
+            })
+        } 
         console.log(document.body);
+        console.log(document.styleSheets);
     </script>
 </body>
 </html>
