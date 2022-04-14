@@ -6,12 +6,11 @@
     <style id="style">
         #container {
             display: flex;
-            width: 720px;
-            height: 720px;
+            width: 960px;
             flex-wrap: wrap;
         }
         .over {
-            background-color: grey;
+            background-color: black;
         }
     </style>
 </head>
@@ -19,7 +18,7 @@
     <div id="container"></div>
     <script>
         let size = 16;
-        let sqrSize = Math.floor(600 / (0.02 + 1.02 * size));
+        let sqrSize = Math.floor(960 / (0.02 + 1.02 * size));
         let sqrMargin = sqrSize * 0.02;
         let container = document.getElementById("container");
         let sqrcss = document.querySelector("#style");
