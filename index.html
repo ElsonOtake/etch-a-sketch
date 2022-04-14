@@ -10,8 +10,8 @@
             height: 720px;
             flex-wrap: wrap;
         }
-        .sqrdiv {
-            border: 1px solid black;
+        .over {
+            background-color: grey;
         }
     </style>
 </head>
@@ -34,6 +34,11 @@
             }
         }
         sqrcss.sheet.insertRule('.sqrdiv {width:'+sqrSize+'px;height:'+sqrSize+'px;margin:'+sqrMargin+';}');
+        container.addEventListener("mouseover",function(e) {
+            if (e.target.className == "sqrdiv") {
+                    e.target.className += " over";
+            }
+        })
         console.log(document.body);
     </script>
 </body>
